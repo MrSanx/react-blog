@@ -1,20 +1,19 @@
-import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import BlogList from './components/BlogList';
-import BlogPost from './components/BlogPost';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import BlogList from './BlogList';
+import BlogPost from './BlogPost';
+import Navbar from './Navbar';
 
-const App = () => {
+function App() {
   return (
-    <BrowserRouter>
-      <div>
-        <Navbar />
-        <Switch>
-          <Route exact path="/" component={BlogList} />
-          <Route path="/blog/:id" component={BlogPost} />
-        </Switch>
+    <Router>
+      <div className="App">
+        <Navbar/>
+        <Routes>
+          <Route exact path="/" element={<BlogList />} />
+          <Route path="/blogpost/:id" element={<BlogPost />} />
+        </Routes>
       </div>
-    </BrowserRouter>
+    </Router>
   );
 }
 
