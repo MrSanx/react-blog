@@ -13,7 +13,7 @@ function BlogPost() {
       url: `https://imdb-top-100-movies.p.rapidapi.com/` + id,
       params: { id: id },
       headers: {
-        'X-RapidAPI-Key': '9519c6a328msheec59aafa1e8b80p1306bbjsn720957386266',
+        'X-RapidAPI-Key': '664874e800msh115933a969010c0p1cb578jsn139cbec4ecc5',
         'X-RapidAPI-Host': 'imdb-top-100-movies.p.rapidapi.com'
       }
     };
@@ -31,7 +31,7 @@ function BlogPost() {
       <div class="blog2">
         
         <div class="post-image">
-          <img src={movie.thumbnail} alt={movie.title} />
+          <img src={movie.image} alt={movie.title} />
         </div>
         <div class="post-details">
           <p><strong>Descripción:</strong> {movie.description}</p>
