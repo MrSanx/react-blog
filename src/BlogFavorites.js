@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import db from './Firebase.js';
-import './BlogList.css'
+import './BlogFavorites.css'
 import { Link } from 'react-router-dom';
 
 function BlogFavorites() {
@@ -19,11 +19,11 @@ function BlogFavorites() {
             });
             console.log(favorito)
 
-            const dataFavoritos = favorito.map(id => {
+            const dataFavoritos = []
+            for (let index = 0; index < favorito.length; index++) {
                 const options = {
                     method: 'GET',
-                    url: `https://imdb-top-100-movies.p.rapidapi.com/` + id,
-                    params: { id: id },
+                    url: 'https://imdb-top-100-movies.p.rapidapi.com/' + favorito[index],
                     headers: {
                         'X-RapidAPI-Key': '664874e800msh115933a969010c0p1cb578jsn139cbec4ecc5',
                         'X-RapidAPI-Host': 'imdb-top-100-movies.p.rapidapi.com'
@@ -31,33 +31,41 @@ function BlogFavorites() {
                 };
 
                 axios.request(options).then(function (response) {
-                    return response.data;
-                }).catch(function (error) {
-                    console.error(error);
-                });
-            })
+                const response = await axios.get(options.url, {headers: options.headers})
+                dataFavoritos.push(response.data)
+
+            }
+            setMovies([...dataFavoritos])
         }
+
+
 
         getFavorites()
 
         return () => { }
     }, []);
 
+    useEffect(() => {
+        console.log(movies)
+    }, [movies])
+
     return (
-        <div class="blog-favorites">
-            {movies.map(movie => (
-                <div className='container'>
-                    <li key={movie.id}>
-                        <div className='topNumber'>
-                            <p>{movie.rank}</p>
-                        </div>
-                        <img src={movie.image} alt={movie.title} />
-                        <div className='titulo'>
-                            <Link to={`/blogpost/${movie.id}`}>{movie.title}</Link>
-                        </div>
-                    </li>
-                </div>
-            ))}
+        <div className="blogfavorites">
+            <ul>
+                {movies.map(movie => (
+                    <div className='container'>
+                        <li key={movie.id}>
+                            <div className='topNumber'>
+                                <p>{movie.rank}</p>
+                            </div>
+                            <img src={movie.image} alt={movie.title} />
+                            <div className='titulo'>
+                                <Link to={`/blogpost/${movie.id}`}>{movie.title}</Link>
+                            </div>
+                        </li>
+                    </div>
+                ))}</ul>
+
         </div>
 
     );
