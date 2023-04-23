@@ -30,8 +30,7 @@ function BlogFavorites() {
                     }
                 };
 
-                axios.request(options).then(function (response) {
-                const response = await axios.get(options.url, {headers: options.headers})
+                const response = await axios.get(options.url, { headers: options.headers })
                 dataFavoritos.push(response.data)
 
             }

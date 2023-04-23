@@ -41,21 +41,20 @@ function BlogList() {
   return (
     <div className='bloglist'>
       <h1>IMDB Top 100 Movies</h1>
-      <button>Filter</button>
       <ul>
         {movies.map(movie => (
-        <div className='container'>
-          <li key={movie.id}>
-            <div className='topNumber'>
-              <p>{movie.rank}</p>
-            </div>
-            <img src={movie.image} alt={movie.title} />
-            <div className='titulo'>
-              <Link to={`/blogpost/${movie.id}`}>{movie.title}</Link>
-              <AiOutlineLike className='fav' onClick={() => addToFavorites(movie.id)}/>
-            </div>
-          </li>
-        </div>
+          <div className='container'>
+            <li key={movie.id}>
+              <div className='topNumber'>
+                <p>{movie.rank}</p>
+              </div>
+              <img src={movie.image} alt={movie.title} />
+              <div className='titulo'>
+                <Link to={`/blogpost/${movie.id}`}>{movie.title}</Link>
+                <AiOutlineLike className='fav' onClick={() => addToFavorites(movie.id)} />
+              </div>
+            </li>
+          </div>
         ))}
       </ul>
     </div>
